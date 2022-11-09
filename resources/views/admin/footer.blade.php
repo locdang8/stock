@@ -38,10 +38,10 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/template/admin/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+  <footer class="container" style="position: fixed; bottom:0; left: 8%;">
+    <strong>Công ty Logistic  <a href="#">Hoàng Minh</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
+      <b>Version</b> 1.0.0
     </div>
   </footer>
