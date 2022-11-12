@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-            Schema::create('bank_account', function (Blueprint $table) {
+            Schema::create('partners', function (Blueprint $table) {
                 $table->id();
                 $table->text('name');
-                $table->string('number_account');
+                $table->text('address');
+                $table->string('phone');
+                $table->string('email');
+                $table->text('note');
+                $table->date('birthday');
+                $table->foreignId('bank_id')->constrained('bank_account');
             });
     }
 
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_account');
+         Schema::dropIfExists('partners');
     }
 };

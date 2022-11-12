@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('template', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+            Schema::create('template', function (Blueprint $table) {
+                $table->id();
+                $table->text('name');
+                $table->foreignId('category_id')->constrained('product_category');
+                $table->text('note');
+            });
     }
 
     /**

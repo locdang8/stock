@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name');
+            $table->string('password');
+            $table->tinyInteger('perm_read');
+            $table->tinyInteger('perm_write');
+            $table->tinyInteger('perm_create');
+            $table->tinyInteger('perm_unlink');
         });
     }
 

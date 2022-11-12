@@ -15,7 +15,15 @@ return new class extends Migration
     {
         Schema::create('invoice', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->text('name');
+            $table->foreignId('partner_id')->constrained('partners');
+            $table->foreignId('order_id')->constrained('order');
+            $table->dateTime('create_date');
+            $table->date('date_payment');
+            $table->text('payment_term');
+            $table->double('total_payment');
+            $table->double('debt');
+            $table->text('state');
         });
     }
 

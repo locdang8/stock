@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_line', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+            Schema::create('order_line', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('order_id')->constrained('order');
+                $table->dateTime('create_date');
+                $table->foreignId('product_id')->constrained('product');
+                $table->integer('amount');
+                $table->double('price');
+            });
     }
 
     /**

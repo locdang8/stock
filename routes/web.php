@@ -28,7 +28,7 @@ Route::get('product', [
     'index'
 ]);
 
-Route::get('/admin/product/{id}', [
+Route::get('product/{id}', [
     ProductController::class,
     'show'
 ]);
@@ -58,7 +58,12 @@ Route::get('invoice', [
     'index'
 ]);
 
-Route::get('invoice/create', [
+Route::get('/admin/invoice/{id}', [
+    InvoiceController::class,
+    'show'
+]);
+
+Route::get('invoice/invoice_create', [
     InvoiceController::class,
     'create'
 ]);

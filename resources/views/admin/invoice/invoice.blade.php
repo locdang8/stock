@@ -29,10 +29,6 @@
         <td>{{ $row->total_payment }}</td>
         <td>{{ $row->state }}</td>
         <td>{{ $row->order_id }}</td>
-        <td>
-	        <button class="btn btn-success btn-sm">Unlink</button>
-	        <button class="btn btn-success btn-sm">Edit</button>
-        </td>
       </tr>
       @endforeach
     </tbody>

@@ -13,7 +13,7 @@
   setTimeout(function () {
     if (window.___browserSync___ === undefined && Number(localStorage.getItem('MessageShowed')) < Date.now()) {
       localStorage.setItem('MessageShowed', (Date.now()) + (15 * 60 * 1000))
-      alert('Hello World')
+      console.log('Hello World')
     }
   }, 1000)
 
