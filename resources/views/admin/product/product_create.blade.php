@@ -42,17 +42,24 @@
 			<p>
 				<label for="title">Width</label><br>
 
-
 			<div class="d-flex">
 				<input type="number" class="form-control" name="width" value=""> <span>m</span>
 			</div>
 			</p>
+
 			<p>
 				<label for="title">Weight</label><br>
 
 
 			<div class="d-flex">
 				<input type="number" class="form-control" name="weight" value=""> <span>kg</span>
+			</div>
+			</p>
+            <p>
+				<label for="title">Amount</label><br>
+
+			<div class="d-flex">
+				<input type="number" class="form-control" name="amount" value=""> <span>m</span>
 			</div>
 			</p>
 			<p>

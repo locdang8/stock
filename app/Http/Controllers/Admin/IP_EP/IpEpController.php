@@ -50,15 +50,7 @@ class IpEpController extends Controller
         $orderline = $orderline->get();
         $array = array();
         foreach($orderline as $row){
-            array_push($array, Template::findOrFail($row->template_id));
-        }
-        $array2= array();
-        foreach($array as $item){
-            $product = Product::where('template_id',$item->id)->select('*');
-            $product = $product->get();
-            foreach($product as $p){
-                array_push($array2, $p);
-            }
+            array_push($array, Product::findOrFail($row->product));
         }
         $data['name']='IPEP'.$order->id;
         $data['partner_id'] = $order->partner_id;
@@ -81,17 +73,9 @@ class IpEpController extends Controller
         $orderline = $orderline->get();
         $array = array();
         foreach($orderline as $row){
-            array_push($array, Template::findOrFail($row->template_id));
+            array_push($array, Product::findOrFail($row->product_id));
         }
-        $array2= array();
-        foreach($array as $item){
-            $product = Product::where('template_id',$item->id)->select('*');
-            $product = $product->get();
-            foreach($product as $p){
-                array_push($array2, $p);
-            }
-        }
-        return view('/admin/import_export/detail', compact('ipeps','title','array2'));
+        return view('/admin/import_export/detail', compact('ipeps','title','array'));
     }
 
     /**
@@ -154,16 +138,16 @@ class IpEpController extends Controller
         }
         else{
             $order->update(['state'=>'Created IP/EP']);
-        $ipep = IpEp::where('order_id',$id)->select('id')->get();
-        $title = 'Ipep create';
-        if ($ipep->value('id') == null){
-            return view('/admin/import_export/ipep_create', compact('id','title'));}
-        else{
-             echo'<script>alert("Order has been shipped")</script>';
-             return app('App\Http\Controllers\Admin\Order\OrderController')->show($id);
+            $ipep = DB::table('import__export')->where('order_id',$id)->select('*');
+            $title = 'Ipep create';
+            if ($ipep->count('id') == 0){
+                return view('/admin/import_export/ipep_create', compact('id','title'));}
+            else{
+                echo'<script>alert("Order has been shipped")</script>';
+                return app('App\Http\Controllers\Admin\Order\OrderController')->show($id);
+                }
             }
         }
-    }
 
     public function fail($id){
         $product = Product::findOrFail($id);
@@ -176,8 +160,14 @@ class IpEpController extends Controller
     public function fail_save(Request $request, $id){
         $data = $request->all();
         $product = Product::findOrFail($id);
-        $product->note = $data['note'];
-        $product->state = 'Fail';
+        $product_fail = $product->replicate();
+        $product_fail->note = $data['note'];
+        $product_fail->amount = $data['amount'];
+        $product_fail->state = 'Fail';
+        $product_fail->name = $product->name.' Fail';
+        $product_fail->save();
+        $product->amount = $product->amount - $data['amount'];
+        $product->state = 'Stored';
         $product->save();
         return redirect('template_view');
     }

@@ -29,8 +29,8 @@ class OrderController extends Controller
         ->join('employee','employee.id','=','order.employee_id')
         ->where('order.id','=',$id)
         ->select('*','order.id as oid','order.name as odname','partner.name as ptname','employee.name as epname')->first();
-        $lines = DB::table('order_line')->join('template','template.id','=','order_line.template_id')->where('order_id','=',$id)
-        ->select('*','order_line.id as olid','template.name as pname','order_line.amount as oamount','order_line.volume as ovulume');
+        $lines = DB::table('order_line')->join('product','product.id','=','order_line.product_id')->where('order_id','=',$id)
+        ->select('*','order_line.id as olid','product.name as pname','order_line.volume as ovolume');
         $lines = $lines->get();
         $title = __('lang.orders');
         $action = 'order_create';

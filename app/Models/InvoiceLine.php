@@ -14,7 +14,7 @@ class InvoiceLine extends Model
         'invoice_id',
         'total_money',
         'amount',
-        'unit_price',
+        'volume',
         'note',
     ];
     public $timestamps = False;

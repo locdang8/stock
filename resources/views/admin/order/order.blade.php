@@ -32,7 +32,6 @@
 					<td><a href="/order/{{$row->oid}}">{{ $row->odname}}</a></td>
 					<td>{{ $row->ptname }}</td>
 					<td>{{ $row->create_date }}</td>
-					<td>{{$row->expiration_date }}</td>
 					<td>{{ $row->received_date }}</td>
 					<td>{{ $row->epname }}</td>
 					<td>{{ $row->state }}</td>

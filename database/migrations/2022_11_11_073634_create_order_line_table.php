@@ -20,6 +20,7 @@ return new class extends Migration
                 $table->dateTime('create_date');
                 $table->foreignId('product_id')->constrained('product');
                 $table->double('volume');
+                $table->integer('amount');
                 $table->text('note')->nullable();
             });
         }

@@ -7,9 +7,9 @@
 			<p>
 				<label for="title">Product Template</label><br>
 			<div class="d-flex align-items-center">
-				<select class="form-control" name="template_id">
+				<select class="form-control" name="product_id">
 					<option selected>Open this select menu</option>
-					@foreach($templates as $row)
+					@foreach($products as $row)
 						<option value="{{$row->id}}">{{$row->name}}</option>
 					@endforeach
 				</select>

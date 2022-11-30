@@ -19,26 +19,25 @@ class OrderLineController extends Controller
     {
         $order = Order::findOrFail($id);
         if ($order->type == 'import'){
-            $templates = DB::table('template')->where('state','New')->select('*');
-            $templates = $templates->get();}
+            $products = DB::table('product')->where('state','New')->select('*');
+            $products = $products->get();}
         else {
-            $templates = DB::table('template')->where('state','Stored')->select('*');
-            $templates = $templates->get();}
+            $products = DB::table('product')->where('state','Stored')->select('*');
+            $products = $products->get();}
         $title = 'Order Line Create';
-        return view('admin.order.order_line', compact('templates','id','title'));
+        return view('admin.order.order_line', compact('products','id','title'));
     }
 
     public function store(Request $request)
     {
         $data = $request->all();
-        $template = Template::findOrFail($data['template_id']);
-        // amount của orderline bằng
-        $data['amount'] = $template->amount;
         // lọc ra các product của template của state là new
-        $product = Product::where('template_id',$template->id)->where('state','New')->orWhere('state','Stored');
-        $data['volume']  = $product->sum('volume');
-        Orderline::create($data);
-        $order = Order::findOrFail($data['order_id']);
+        $product = Product::findOrFail($data['product_id']);
+        $data['volume']  = $product->volume;
+        $data['amount']  = $product->amount;
+        $order_line = Orderline::create($data);
+        $order = Order::findOrFail($order_line->order_id);
+        $product->update(['partner_id'=>$order->partner_id]);
         $id = $order->id;
         return redirect('/order/'.$id.'');
     }
@@ -48,14 +47,14 @@ class OrderLineController extends Controller
         //lọc ra các template nào đang có trang thái là new để gắn cho order line
         $orderline = OrderLine::findOrFail($id);
         if (Order::findOrFail($orderline->order_id)->type=="import"){
-        $templates = Template::where('state','New');
-        $templates = $templates->get();}
+        $products = Product::where('state','New');
+        $products = $products->get();}
         else{
-        $templates = Template::where('state','Stored');
+        $products = Product::where('state','Stored');
         }
         $title = 'Order line edit';
         // điều hướng đến view edit user và truyền sang dữ liệu về user muốn sửa đổi
-        return view('admin/order/orderline_edit', compact('orderline','templates', 'title'));
+        return view('admin/order/orderline_edit', compact('orderline','products', 'title'));
     }
 
     public function update(Request $request, $id){
@@ -64,21 +63,20 @@ class OrderLineController extends Controller
         // Tìm đến đối tượng muốn update
         $orderlines = OrderLine::findOrFail($id);
 
-        //tìm đến template update
-        $template = Template::findOrFail($data['template_id']);
+//         //tìm đến product update
+//         $product = Product::findOrFail($data['product_id']);
 
         //tinh the tích cho order line
         if (Order::findOrFail($orderlines->order_id)->type='import'){
-            $product = DB::table('product')->where('template_id',$template->id)->where('state','New')->select('*');
+            $product = $product->where('state','New')->select('*');
             $product = $product->get();}
         else{
-            $product = DB::table('product')->where('template_id',$template->id)->where('state','Stored')->select('*');
+            $product = $product->where('state','Stored')->select('*');
             $product = $product->get();}
         //thể tíc của orderline
-        $data['volume']  = $product->sum('volume');
-        // amount của orderline bằng
-        $data['amount'] = $product->count();
+        $data['volume']  = $product->volume;
         $orderlines->update($data);
+        $product->update(['partner_id'=>Order::findOrFail($orderlines->order_id)->partner_id]);
         // quay trở lại trang chi tiết order chưa order line vừa sửa
         return redirect('/order/'.$orderlines->order_id.'');
     }

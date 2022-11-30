@@ -12,10 +12,10 @@ class Orderline extends Model
     protected $fillable = [
         'name',
         'order_id',
-        'template_id',
+        'product_id',
         'create_date',
-        'amount',
         'volume',
+        'amount',
         'note'
     ];
     public $timestamps = False;

@@ -10,7 +10,6 @@ class Product extends Model
     protected $table = 'product';
     protected $fillable = [
         'name',
-        'amount',
         'template_id',
         'note',
         'state',
@@ -22,7 +21,9 @@ class Product extends Model
         'price',
         'volume',
         'import_date',
-        'export_date'
+        'export_date',
+        'partner_id',
+        'amount'
     ];
     public $timestamps = False;
     protected $defaults = array(

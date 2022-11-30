@@ -13,6 +13,7 @@
 	<thead>
 		<tr class="bg-success">
 			<th>{{__('lang.name')}}</th>
+			<th>{{__('lang.partner')}}</th>
 			<th>{{__('lang.price')}}</th>
 			<th>{{__('lang.state')}}</th>
 			<th>{{__('lang.height')}}</th>
@@ -20,12 +21,15 @@
 			<th>{{__('lang.length')}}</th>
 			<th>{{__('lang.weight')}}</th>
 			<th>{{__('lang.color')}}</th>
+			<th>Import date</th>
+			<th>Export date</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach($products as $row)
 		<tr>
 			<td><a href="/product/{{$row->pid}}">{{$row->tname}}</a></td>
+			<td>{{$row->pname}}</td>
 			<td>{{$row->price}} <sup>đ</sup></td>
 			<td>{{$row->pstate}}</td>
 			<td>{{$row->height}} <sup>m</sup></td>
@@ -33,6 +37,8 @@
 			<td>{{$row->length}} <sup>m</sup></td>
 			<td>{{$row->weight}} <sup>kg</sup></td>
 			<td>{{$row->color}}</td>
+			<td>{{$row->import_date}}</td>
+			<td>{{$row->export_date}}</td>
 		</tr>
 		@endforeach
 	</tbody>

@@ -14,9 +14,10 @@
 		<div class="col-4">
 			<ul>
 				<li>{{__('lang.name')}}: {{ $products->tname }}</li>
+				<li>{{__('lang.name')}}: {{ $products->pname }}</li>
 				<li>{{__('lang.price')}}: {{ $products->price }} <sup>đ</sup></li>
-				<li>{{__('lang.date_manufacture')}}: {{$template->date_manufacture}}</li>
-				<li>{{__('lang.date_expiry')}}: {{$template->expiry_date}}</li>
+				<li>{{__('lang.date_import')}}: {{$products->import_date}}</li>
+				<li>{{__('lang.date_export')}}: {{$products->export_date}}</li>
 			</ul>
 		</div>
 		<div class="col-4">

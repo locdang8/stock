@@ -12,11 +12,6 @@
 				</select>
 			</p>
 			<p>
-				<label for="title">Expiration Date</label><br> <input
-					type="datetime-local" class="form-control" name="expiration_date"
-					value="">
-			</p>
-			<p>
 				<label for="title">Received Date</label><br> <input
 					type="datetime-local" class="form-control" name="received_date"
 					value="">

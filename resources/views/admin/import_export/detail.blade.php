@@ -36,8 +36,6 @@
 	<thead>
 		<tr class="bg-success">
 			<th>{{__('lang.name')}}</th>
-			<th>{{__('lang.price')}}</th>
-			<th>{{__('lang.price_cost')}}</th>
 			<th>{{__('lang.state')}}</th>
 			<th>{{__('lang.height')}}</th>
 			<th>{{__('lang.width')}}</th>
@@ -48,11 +46,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($array2 as $row)
+		@foreach($array as $row)
 		<tr>
 			<td><a href="/product/{{$row->id}}">{{$row->name}}</a></td>
-			<td>{{$row->price}} <sup>đ</sup></td>
-			<td>{{$row->price_cost}} <sup>đ</sup></td>
 			<td>{{$row->state}}</td>
 			<td>{{$row->height}} <sup>m</sup></td>
 			<td>{{$row->width}} <sup>m</sup></td>

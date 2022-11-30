@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->double('price');
             $table->string('state');
-            $table->foreignId('partner_id')->constrained('partner');
+            $table->integer('amount');
+            $table->foreignId('partner_id')->nullable()->constrained('partner');
         });
     }
 

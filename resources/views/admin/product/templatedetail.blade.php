@@ -52,6 +52,7 @@
 					<th>Price</th>
 					<th>Volume</th>
 					<th>State</th>
+					<th>Amount</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -66,6 +67,7 @@
 					<td>{{ $row->price}}</td>
 					<td>{{ $row->volume}} <sup>m<sup>3</sup></sup></td>
 					<td>{{ $row->pstate}}</td>
+					<td>{{ $row->amount}}</td>
 					<td><a href="/product_delete/{{$row->pid}}">Remove</a>
 						<a href="/product_edit/{{$row->pid}}">Edit</a>
 					</td>

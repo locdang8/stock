@@ -26,7 +26,6 @@
 					<li>{{__('lang.name')}}: {{ $orders->odname }}</li>
 					<li>{{__('lang.partner')}}: {{ $orders->ptname }}</li>
 					<li>{{__('lang.createdate')}}: {{ $orders->create_date }}</li>
-					<li>{{__('lang.edate')}}: {{ $orders->expiration_date }}</li>
 				</ul>
 			</div>
 			<div class="col-4">
@@ -55,6 +54,7 @@
 					<th>Create Date</th>
 					<th>Product</th>
 					<th>Volume</th>
+					<th>Amount</th>
 					<th>Note</th>
 					<th style="width: 170px">Action</th>
 				</tr>
@@ -65,6 +65,7 @@
 					<td>{{$row->create_date}}</td>
 					<td>{{$row->pname}}</td>
 					<td>{{$row->volume}} <sup>m<sup>3</sup></sup></td>
+					<td>{{$row->amount}}</th>
 					<td>{{$row->note}}</td>
 					<td><a href="/orderline_edit/{{$row->olid}}"><button  class="btn">Edit</button></a>
 						<a href="/orderline_delete/{{$row->olid}}"><button class="btn">Remove</button></a>

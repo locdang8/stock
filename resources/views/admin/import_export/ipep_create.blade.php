@@ -1,5 +1,5 @@
 @include('admin.head')
-<form method="post" action="/ipep/store" class="form-group container mt-5">
+<form method="post" action="/ipepstore" class="form-group container mt-5">
  <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
  <div class="row">
  	<div class="col-6">

@@ -14,7 +14,8 @@ class ProductController extends Controller
     public function index() {
         $products = DB::table('product')
         ->join('template','template.id','product.template_id')
-        ->select('*', 'product.id as pid', 'template.name as tname')->paginate(5);
+        ->join('partner','partner.id','product.partner_id')
+        ->select('*', 'product.id as pid', 'template.name as tname','partner.name as pname','product.state as pstate')->paginate(5);
         $title = __('lang.product');
         $action = 'product_create';
         return view('/admin/product/product', compact('products', 'title','action'));
@@ -22,12 +23,14 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $products = DB::table('product')->join('template','template.id','product.template_id')
-        ->where('product.id', '=', $id)->select('*','template.name as tname','product.id as pid','product.state as pstate','product.note as pnote')->first();
-        $template = DB::table('template')->where('id',$products->template_id)->first();
+        $products = Product::
+        join('template','template.id','product.template_id')
+        ->join('partner','partner.id','product.partner_id')
+        ->where('product.id', '=', $id)->select('*','template.name as tname','product.id as pid','product.state as pstate','product.note as pnote','partner.name as pname');
+        $products = $products->get();
         $title = __('lang.product_detail');
         $action = 'order_create';
-        return view('/admin/product/productdetail', compact('products', 'template','title','action'));
+        return view('/admin/product/productdetail', compact('products','title','action'));
     }
 
     public function create($id)
@@ -44,13 +47,10 @@ class ProductController extends Controller
         $data['name']= $template->name;
         $data['volume'] = $data['height']*$data['width']*$data['length'];
         $product = Product::create($data);
-        $product_list = Product::where('template_id',$product->template_id);
-        $template->amount = $product_list->count();
-        $template->save();
         //tìm ra order line chứa template để cập nhật amount và volume
-        $order_line = Orderline::where('template_id',$template->id);
+        $order_line = Orderline::where('product_id',$product->id);
 
-            $order_line->update(['amount' => $template ->amount],['volume' => $product_list->sum('volume')]);
+        $order_line->update(['volume' => $product->volume]);
         return redirect('template/'.$product->template_id.'');
     }
 
