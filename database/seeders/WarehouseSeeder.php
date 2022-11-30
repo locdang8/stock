@@ -18,13 +18,21 @@ class WarehouseSeeder extends Seeder
     //insert name and type 
     public function run()
     {
-        $faker = Faker::create();
-        foreach (range(1,3) as  $value) {
-            # code...
-            DB::table('warehouse')->insert([
-                'name' => $faker->name,
-                'type' => $faker->text,
-            ]);
-        }
+        return DB::table('warehouse')->insert([
+            [
+            'name' => 'Kho kiểm soát khí hậu',
+            'type' => 'Dịch vụ'
+            ],
+            [
+                'name' => 'Kho tư nhân',
+                'type' => 'Dịch vụ'
+            ],
+            [
+                'name' => 'Kho chung công cộng',
+                'type' => 'Dịch vụ'
+            ],
+        ]);    
+        
+        
     }
 }

@@ -18,6 +18,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Admin\Partner\PartnerController;
 use App\Http\Controllers\Portal\PortalController;
+use App\Http\Controllers\SearchAmountController;
 
 // trả về view đăng nhập
 
@@ -286,6 +287,22 @@ Route::get('warehouse', [
 Route::get('warehouseinventory', [
     WarehouseInventoryController::class,
     'index'
+]);
+
+Route::get('warehouseinventory_create', [
+    WarehouseInventoryController::class,
+    'create'
+]);
+
+Route::post('warehouseinventory_store', [
+    WarehouseInventoryController::class,
+    'store'
+])->name('warehouseinventory.store');
+
+
+Route::get('/getamount', [
+    SearchAmountController::class,
+    'getamount'
 ]);
 
 Route::get('/invoice_delete/{id}', [

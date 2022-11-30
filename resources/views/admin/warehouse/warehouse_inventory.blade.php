@@ -5,6 +5,9 @@
 </head>
 @include('admin.main')
         <!-- Small boxes (Stat box) -->
+<a href="/warehouseinventory_create">
+  <button class="btn btn-success">{{__('lang.create')}}</button>
+</a>
 <table class="table table-bordered">
     <thead>
      <tr class="bg-success">
@@ -20,7 +23,7 @@
     <tbody>
     @foreach($wis as $row)
       <tr>
-        <td>{{ $row->pdname}}</td>
+        <td>{{ $row->tpname}}</td>
         <td>{{ $row->epname }}</td>
         <td>{{ $row->actual_number }}</td>
         <td>{{$row->quantity_checked }}</td>
