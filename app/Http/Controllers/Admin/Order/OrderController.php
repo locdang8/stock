@@ -113,7 +113,7 @@ class OrderController extends Controller
                 $invoice_line = new InvoiceLine;
                 $invoice_line->product_id = $row->product_id;
                 $invoice_line->invoice_id = $invoice->id;
-                $invoice_line->total_money = $row->amount*$row->price * 0.05 +$row->amount*$row->price;
+                $invoice_line->total_money = $row->amount*$row->volume * 0.05 +$row->amount*$row->price;
                 $invoice_line->amount = $row->amount;
                 $invoice_line->unit_price = $row->price;
                 $invoice_line->note='a';

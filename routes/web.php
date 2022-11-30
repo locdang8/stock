@@ -325,10 +325,10 @@ Route::get('/create_ipep/{id}', [
     'create'
 ]);
 
-Route::post('/ipep/create', [
-    IpEpController::class,
-    'store'
-]);
+// Route::post('/ipep/create', [
+//     IpEpController::class,
+//     'store'
+// ]);
 
 Route::get('/orderline_delete/{id}', [
     OrderLineController::class,
@@ -348,7 +348,7 @@ Route::get('order_done/{id}', [
 
 Route::post('/ipepstore', [
     IpEpController::class,
-    'store'
+    'store_ipep'
 ]);
 
 Route::get('/ipep_done/{id}', [

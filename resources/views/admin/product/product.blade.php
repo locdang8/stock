@@ -21,14 +21,16 @@
 			<th>{{__('lang.length')}}</th>
 			<th>{{__('lang.weight')}}</th>
 			<th>{{__('lang.color')}}</th>
+			<th>{{__('lang.amount')}}</th>
 			<th>Import date</th>
 			<th>Export date</th>
+			<th>Note</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach($products as $row)
 		<tr>
-			<td><a href="/product/{{$row->pid}}">{{$row->tname}}</a></td>
+			<td><a href="/product/{{$row->pid}}">{{$row->productname}}</a></td>
 			<td>{{$row->pname}}</td>
 			<td>{{$row->price}} <sup>đ</sup></td>
 			<td>{{$row->pstate}}</td>
@@ -37,8 +39,10 @@
 			<td>{{$row->length}} <sup>m</sup></td>
 			<td>{{$row->weight}} <sup>kg</sup></td>
 			<td>{{$row->color}}</td>
+			<td>{{$row->pamount}}</td>
 			<td>{{$row->import_date}}</td>
 			<td>{{$row->export_date}}</td>
+			<td>{{$row->pnote}}</td>
 		</tr>
 		@endforeach
 	</tbody>

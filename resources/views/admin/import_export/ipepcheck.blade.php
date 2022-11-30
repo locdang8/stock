@@ -5,8 +5,8 @@
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 	<div class="container">
         <li>
-            <label for="amount">Note</label><br>
-            <input class="form-control" type="number">
+            <label for="amount">Amount</label><br>
+            <input class="form-control" type="number" name="amount">
         </li>
         <li>
             <label for="title">Note</label><br>

@@ -12,13 +12,13 @@ use App\Models\Order;
 class ProductController extends Controller
 {
     public function index() {
+        $title = __('lang.product');
         $products = DB::table('product')
         ->join('template','template.id','product.template_id')
         ->join('partner','partner.id','product.partner_id')
-        ->select('*', 'product.id as pid', 'template.name as tname','partner.name as pname','product.state as pstate')->paginate(5);
-        $title = __('lang.product');
-        $action = 'product_create';
-        return view('/admin/product/product', compact('products', 'title','action'));
+        ->select('*', 'product.id as pid', 'template.name as tname','partner.name as pname','product.state as pstate','product.note as pnote','product.amount as pamount','product.name as productname')->paginate(5);
+        $title = 'Product Fail';
+        return view('/admin/product/product', compact('products', 'title'));
     }
 
     public function show($id)
@@ -85,21 +85,22 @@ class ProductController extends Controller
         return $this->show($id);
     }
     public function view_product_fail(){
-    $products = DB::table('product')
+        $products = DB::table('product')
         ->join('template','template.id','product.template_id')
+        ->join('partner','partner.id','product.partner_id')
         ->where('product.state','Fail')
-        ->select('*', 'product.id as pid', 'template.name as tname','product.state as pstate')->paginate(5);
-        $title = 'Product fail';
-        $action = 'product_create';
-        return view('/admin/product/product', compact('products', 'title','action'));
+        ->select('*', 'product.id as pid', 'template.name as tname','partner.name as pname','product.state as pstate','product.note as pnote','product.amount as pamount',
+                 'product.name as productname')->paginate(5);
+        $title = 'Product Fail';
+        return view('/admin/product/product', compact('products', 'title'));
     }
     public function view_product_stored(){
         $products = DB::table('product')
-            ->join('template','template.id','product.template_id')
-            ->where('product.state','Stored')
-            ->select('*', 'product.id as pid', 'template.name as tname','product.state as pstate')->paginate(5);
-            $title = 'Product stored';
-            $action = 'product_create';
-            return view('/admin/product/product', compact('products', 'title','action'));
+        ->join('template','template.id','product.template_id')
+        ->join('partner','partner.id','product.partner_id')
+        ->where('product.state','Stored')
+        ->select('*', 'product.id as pid', 'template.name as tname','partner.name as pname','product.state as pstate','product.note as pnote','product.amount as pamount','product.name as productname')->paginate(5);
+        $title = 'Product Stored';
+        return view('/admin/product/product', compact('products', 'title'));
     }
 }

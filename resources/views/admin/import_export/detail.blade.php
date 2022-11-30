@@ -42,6 +42,7 @@
 			<th>{{__('lang.length')}}</th>
 			<th>{{__('lang.weight')}}</th>
 			<th>{{__('lang.color')}}</th>
+			<th>Số lượng</th>
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -55,6 +56,7 @@
 			<td>{{$row->length}} <sup>m</sup></td>
 			<td>{{$row->weight}} <sup>kg</sup></td>
 			<td><input type="color" disable value="{{$row->color}}"></td>
+            <td>{{$row->amount}}</td>
 			<td>
                 <a href="/fail/{{$row->id}}"><button class="btn">Fail</button></a>
                 <a href="/save/{{$row->id}}"><button class="btn">Store</button></a>

@@ -42,7 +42,7 @@ class IpEpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store_ipep(Request $request)
     {
         $data = $request->all();
         $order = Order::findOrFail($data['order_id']);
@@ -50,13 +50,13 @@ class IpEpController extends Controller
         $orderline = $orderline->get();
         $array = array();
         foreach($orderline as $row){
-            array_push($array, Product::findOrFail($row->product));
+            array_push($array, Product::findOrFail($row->product_id));
         }
         $data['name']='IPEP'.$order->id;
         $data['partner_id'] = $order->partner_id;
         $data['status'] = 'New';
         $ipep = IpEp::create($data);
-        return $this->show($ipep->id);
+        return redirect('/ipep/'.$ipep->id.'');
     }
     /**
      * Display the specified resource.
@@ -165,15 +165,17 @@ class IpEpController extends Controller
         $product_fail->amount = $data['amount'];
         $product_fail->state = 'Fail';
         $product_fail->name = $product->name.' Fail';
+        $product_fail->import_date = date('Y-m-d H:i:s');
         $product_fail->save();
         $product->amount = $product->amount - $data['amount'];
-        $product->state = 'Stored';
+        //$product->state = 'Stored';
         $product->save();
-        return redirect('template_view');
+        return redirect('ipep');
     }
     public function import($id){
         $product = Product::findOrFail($id);
         $product->state = 'Stored';
+        $product->import_date = date('Y-m-d H:i:s');
         $product->save();
         return redirect('ipep');
     }
